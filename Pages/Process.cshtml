@@ -1,16 +1,24 @@
 ﻿@page
+@using System.Diagnostics
 @model HelloRazor.Pages.ProcessModel
 @{
-    string[]? people = ViewData["People"] as string[];
+    var procs = ViewData["Procs"] as Process[];
 }
 
 <div>
     <h2>Process Page</h2>
-    <h4>@ViewData["Message"]</h4>
-    <ul>
-        @foreach (var person in people!)
+    @if (procs != null)
+    {
+        foreach (var p in procs)
         {
-            <li>@person</li>
+            <div>
+                <p>Process Name: @p.ProcessName</p>
+                <p>Process ID: @p.Id</p>
+            </div>
         }
-    </ul>
+    }
+    else
+    {
+        <p>No processes available.</p>
+    }
 </div>
